@@ -1,14 +1,18 @@
 Rocky Linux - Backend Server 
 
+# httpd 설치
 dnf install httpd -y
 systemctl start httpd
 systemctl enable httpd
 systemctl status httpd
 
+# 방화벽 
 firewall-cmd --add-port=80/tcp --permanent
 firewall-cmd --reload
 
+# html 파일 생성
 vi /var/www/html/index.html
 @ <h1> Welcome! Server 1 </h1>
 
+# httpd 재시작
 systemctl restart httpd

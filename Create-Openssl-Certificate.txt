@@ -1,0 +1,48 @@
+Openssl 인증서 생성 
+
+# Openssl 설치
+dnf install openssl -y
+
+# 최상위 key 생성 (KEY) - 개인키
+openssl genrsa -out rootCA.key 2048
+
+# 최상위 csr 생성 (CSR) - 인증 요청서
+openssl req -new -key rootCA.key -out rootCA.csr
+@ Country Name : KR
+@ State or Province Name:
+@ Organization Name : 
+@ Organization Unit Name :
+@ Common Name : (IP)
+@ Email Address : 
+
+@ A challenge password :
+@ An optional commany name : 
+
+# 최상위 crt 생성 (CRT)
+openssl x509 -req -in rootCA.csr -signkey rootCA.key -out rootCA.crt
+
+
+# 서버 key 생성 (KEY) - 서버 개인키
+openssl genrsa -out domain.key 2048
+# 확인
+ls 
+
+# csr 생성 (CSR) - 서버 인증요청서
+openssl req -new -key domain.key -out domain.csr
+@ Country Name : KR
+@ State or Province Name:
+@ Organization Name : 
+@ Organization Unit Name :
+@ Common Name : (IP)
+@ Email Address : 
+
+@ A challenge password :
+@ An optional commany name : 
+
+# 확인
+ls
+
+# crt 생성 (CRT) - 인증서 생성
+openssl x509 -req -in domain.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out domain.crt
+
+https://m.blog.naver.com/espeniel/221845133507
