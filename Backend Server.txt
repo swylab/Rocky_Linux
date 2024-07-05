@@ -1,0 +1,14 @@
+Rocky Linux - Backend Server 
+
+dnf install httpd -y
+systemctl start httpd
+systemctl enable httpd
+systemctl status httpd
+
+firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --reload
+
+vi /var/www/html/index.html
+@ <h1> Welcome! Server 1 </h1>
+
+systemctl restart httpd

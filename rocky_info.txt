@@ -1,0 +1,11 @@
+haproxy 
+10.10.166.200   lb.swy.lab
+
+web
+10.10.166.201   vm01.swy.lab
+10.10.166.202   vm02.swy.lab
+
+
+https://computingforgeeks.com/install-and-configure-haproxy-on-rocky/
+
+

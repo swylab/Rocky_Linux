@@ -1,0 +1,27 @@
+Rocky Linux - HA Proxy 
+
+dnf install httpd -y
+systemctl start httpd
+systemctl enable httpd
+systemctl status httpd
+
+firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --reload 
+
+dnf install haproxy -y
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.ori #백업
+vi /etc/haproxy/haproxy.cfg
+
+setenforce 0 
+vi /etc/selinux/config
+enforcing >> permissive (변경)
+
+haproxy -c -f /etc/haproxy/haproxy.cfg
+@Configuration file is valid
+
+grep -v "^ *#" /etc/haproxy/haproxy.cfg | grep -v "^$"
+
+systemctl restart haproxy
+systemctl enable haproxy
+systemctl status haproxy
+
